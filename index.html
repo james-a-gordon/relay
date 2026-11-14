@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'">
+<title>Returning</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; font: 12px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; background: Canvas; color: CanvasText; }
+  main { padding: 16px; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+<main><p>Returning… <a id="go" href="http://localhost:8765/oauth-return">Continue</a></p></main>
+<script>
+  (() => {
+    var target = 'http://localhost:8765/oauth-return';
+    var q = new URLSearchParams(location.search);
+    var t = q.get('fd_target');
+    if (t && /^http:\/\/(localhost|127\.0\.0\.1):\d+\/oauth-return$/.test(t)) target = t;
+    q.delete('fd_target');
+    var s = q.toString();
+    var url = target + (s ? '?' + s : '');
+    document.getElementById('go').href = url;
+    location.replace(url);
+  })();
+</script>
+</body>
+</html>
